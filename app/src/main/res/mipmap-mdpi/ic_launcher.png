@@ -1,0 +1,88 @@
+package com.lenovo.billing.presenter;
+
+
+import android.content.Context;
+import android.util.Log;
+
+import com.lenovo.billing.model.*;
+import com.lenovo.billing.protocol.*;
+import com.lenovo.billing.state.BillSub;
+
+public class Presenter implements BillingViewable {
+
+    private static final String TAG = Presenter.class.getSimpleName();
+
+    private Billing billing;
+    private IView iView;
+
+    private Context ctx;
+
+    public Presenter(Context context, IView iView) {
+        this.iView = iView;
+
+        billing = new Billing(context);
+        billing.setmBillingViewable(this);
+    }
+
+    public BillSub getBillSub() {
+        return billing.getBillSub();
+    }
+
+    public void startTimerOfFaceDetect() {
+        billing.startTimerOfFaceDetect();
+    }
+
+    public void cancelTimerOfFaceDetect() {
+        billing.cancelTimerOfFaceDetect();
+    }
+
+    //
+    // Implement BillingViewable.
+    //
+
+    @Override
+    public void toDefaultCallback() {
+        if (iView != null) {
+            iView.toDefaultCallback();
+        }
+    }
+
+    @Override
+    public void toRecognitionCallback() {
+        if (iView != null) {
+            iView.toRecognitionCallback();
+        }
+    }
+
+    @Override
+    public void toBillCallback(boolean isLocal) {
+        if (iView != null) {
+            iView.toBillCallback(isLocal);
+        }
+    }
+
+    @Override
+    public void toRepositionCallback() {
+        if (iView != null) {
+            iView.toRepositionCallback();
+        }
+    }
+
+    @Override
+    public void toDownloadProductsListCallBack(String goodsListJsonStr) {
+        if (iView != null) {
+            iView.toDownloadProductsListCallBack(goodsListJsonStr);
+        }
+    }
+
+    @Override
+    public void toGetBarcodesCallBack(String barcodeList) {
+        if (iView != null) {
+            iView.toGetBarcodesCallBack(barcodeList);
+        }
+    }
+
+    @Override
+    public void toIsCheckedCallBack(String response) {
+        if (iView != null) {
+            iView
