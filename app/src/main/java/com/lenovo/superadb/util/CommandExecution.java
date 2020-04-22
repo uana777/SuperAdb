@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import android.util.Log;
 
 /**
- * 执行shell脚本工具类
+ * execution shell command
  */
 public class CommandExecution {
 
@@ -20,9 +20,7 @@ public class CommandExecution {
     private final static String COMMAND_LINE_END = "\n";
 
     /**
-     * Command执行结果
-     *
-     * @author Mountain
+     * command(s) exec result
      */
     public static class CommandResult {
         public int result = -1;
@@ -31,9 +29,9 @@ public class CommandExecution {
     }
 
     /**
-     * 执行命令—单条
+     * exec command
      *
-     * @param command common
+     * @param command command
      * @param isRoot  su
      * @return result
      */
@@ -43,9 +41,9 @@ public class CommandExecution {
     }
 
     /**
-     * 执行命令-多条
+     * exec commands
      *
-     * @param commands commons[]
+     * @param commands commands[]
      * @param isRoot   su
      * @return result
      */
@@ -72,7 +70,7 @@ public class CommandExecution {
             os.writeBytes(COMMAND_EXIT);
             os.flush();
             commandResult.result = process.waitFor();
-            //获取错误信息
+            // cat the err msg
             successMsg = new StringBuilder();
             errorMsg = new StringBuilder();
             successResult = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -114,5 +112,4 @@ public class CommandExecution {
         }
         return commandResult;
     }
-
 }

@@ -12,9 +12,7 @@ public class BootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
         startService(context);
-
     }
 
     private void startService(Context context) {
@@ -22,5 +20,4 @@ public class BootReceiver extends BroadcastReceiver {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startService(intent);
     }
-
 }

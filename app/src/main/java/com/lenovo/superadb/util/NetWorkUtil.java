@@ -14,17 +14,13 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
 
-/**
- * 设备网络信息
- */
-
 public class NetWorkUtil {
 
     private static final String TAG = NetWorkUtil.class.getSimpleName();
 
 
     /**
-     * 检查网络是否可用
+     * check net state
      */
     public static boolean checkEnable(Context paramContext) {
 
@@ -39,7 +35,7 @@ public class NetWorkUtil {
         NetworkInfo info = ((ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
         if (info != null && info.isConnected()) {
-            if (info.getType() == ConnectivityManager.TYPE_MOBILE) {//当前使用2G/3G/4G网络
+            if (info.getType() == ConnectivityManager.TYPE_MOBILE) { // 2G/3G/4G
                 try {
                     //Enumeration<NetworkInterface> en=NetworkInterface.getNetworkInterfaces();
                     for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
@@ -56,7 +52,7 @@ public class NetWorkUtil {
                 } catch (SocketException e) {
                     e.printStackTrace();
                 }
-            } else if (info.getType() == ConnectivityManager.TYPE_WIFI) {//当前使用无线网络
+            } else if (info.getType() == ConnectivityManager.TYPE_WIFI) { // wifi
                 @SuppressLint("WifiManagerPotentialLeak")
                 WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
                 WifiInfo wifiInfo = wifiManager.getConnectionInfo();
@@ -64,7 +60,7 @@ public class NetWorkUtil {
             }
         }
 
-        if (ip == null || ip.isEmpty()) {
+        if (ip == null || ip.isEmpty()) {  // maybe ethernet
             String[] commons = new String[1];
             commons[0] = "ifconfig eth0";
 
